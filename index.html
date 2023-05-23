@@ -65,6 +65,16 @@
                     }
                 })
             });
+            cy.layout({
+                name: 'cola',
+                padding: document.documentElement.clientHeight * 0.15,
+                fit: true,
+                idealEdgeLength: 64,
+                edgeElasticity: 128,
+                gravity: 0.15,
+                numIter: 750,
+                initialTemp: 2000,
+            }).run()
         }
     </script>
 </body>
