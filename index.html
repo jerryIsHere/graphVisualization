@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.20.0/cytoscape.umd.js">
+</script>
+<script src="https://unpkg.com/webcola/WebCola/cola.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cytoscape-cola@2.5.1/cytoscape-cola.js">
+</script>
+
 <head>
     <title>Knowledge Graph Visualization</title>
     <style>
@@ -16,6 +22,40 @@
     <div id="graph-container"></div>
     <div> <button id="zoom-in-btn">Zoom In</button> <button id="zoom-out-btn">Zoom Out</button> </div>
     <script src="graph.js"></script>
+    <script>
+        function edgeIdFromNames(h_name, r_name, t_name) {
+            return h_name + '.' + r_name + '.' + t_name
+        }
+        document.onload(() => {
+            cy = cytoscape({
+                wheelSensitivity: 0.15,
+                boxSelectionEnabled: false,
+            })
+            cy.mount(document.getElementById("graph-container"))
+            triples.forEach(triple => {
+                [triple.h_name, triple.t_name].forEach(
+                    name => {
+                        if (cy.getElementById(name).length == 0) {
+                            cy.add({
+                                group: 'nodes',
+                                data: {
+                                    id: name,
+                                },
+                            })
+                        }
+                    })
+                cy.add({
+                    group: 'edges',
+                    data: {
+                        source: triple.h_name,
+                        target: triple.t_name,
+                        name: triple.r_name,
+                        id: edgeIdFromNames(triple.h_name, triple.r_name, triple.t_name),
+                    }
+                })
+            });
+        })
+    </script>
 </body>
 
 </html>
