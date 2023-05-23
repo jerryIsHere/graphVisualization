@@ -1,19 +1,33 @@
 <!DOCTYPE html>
 <html>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.20.0/cytoscape.umd.js">
-</script>
-<script src="https://unpkg.com/webcola/WebCola/cola.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cytoscape-cola@2.5.1/cytoscape-cola.js">
-</script>
-
 <head>
     <title>Knowledge Graph Visualization</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.20.0/cytoscape.umd.js">
+    </script>
+    <script src="https://unpkg.com/webcola/WebCola/cola.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cytoscape-cola@2.5.1/cytoscape-cola.js">
+    </script>
+    <style>
+        .button {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+    </style>
 </head>
 
 <body>
     <div id="graph-container" style="height: 99vh; width: 99vw;"></div>
-    <div style="position: absolute;bottom: 0;"> <button id="zoom-in-btn">Zoom In</button> <button id="zoom-out-btn">Zoom
+    <div style="position: absolute;bottom: 0;">
+        <button style="position: absolute;left: 0; width: 50%" id="zoom-in-btn">Zoom In</button>
+        <button style="position: absolute;right:0; width: 50%" id="zoom-out-btn">Zoom
             Out</button> </div>
     <script src="./graph.js"></script>
     <script>
@@ -75,6 +89,12 @@
                 numIter: 750,
                 initialTemp: 2000,
             }).run()
+            document.getElementById("zoom-in-btn").onclick = () => {
+                cy.zoom(cy.zoom() + .1)
+            }
+            document.getElementById("zoom-out-btn").onclick = () => {
+                cy.zoom(cy.zoom() - .1)
+            }
         }
     </script>
 </body>
