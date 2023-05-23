@@ -28,6 +28,9 @@
         }
         window.onload = () => {
             cy = cytoscape({
+                style: {
+                    'background-color': 'white'
+                },
                 wheelSensitivity: 0.15,
                 boxSelectionEnabled: false,
             })
