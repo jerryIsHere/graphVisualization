@@ -118,16 +118,18 @@
             zoomInInterval = null
             zoomOutInterval = null
             document.getElementById("zoom-in-btn").onmousedown = () => {
-                zoomInInterval = zoomIn()
+                zoomInInterval = zoomInInterval ? zoomInInterval : zoomIn()
             }
             document.getElementById("zoom-out-btn").onmousedown = () => {
-                zoomOutInterval = zoomOut()
+                zoomOutInterval = zoomOutInterval ? zoomOutInterval : zoomOut()
             }
             document.getElementById("zoom-in-btn").onmouseup = () => {
                 clearInterval(zoomInInterval)
+                zoomInInterval = null
             }
             document.getElementById("zoom-out-btn").onmouseup = () => {
                 clearInterval(zoomOutInterval)
+                zoomOutInterval = null
             }
         }
     </script>
