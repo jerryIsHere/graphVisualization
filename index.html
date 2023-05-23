@@ -26,7 +26,7 @@
         function edgeIdFromNames(h_name, r_name, t_name) {
             return h_name + '.' + r_name + '.' + t_name
         }
-        document.onload(() => {
+        window.onload(() => {
             cy = cytoscape({
                 wheelSensitivity: 0.15,
                 boxSelectionEnabled: false,
