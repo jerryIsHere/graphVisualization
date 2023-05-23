@@ -24,8 +24,8 @@
 </head>
 
 <body style="margin: unset;">
-    <div id="graph-container" style="height: 99vh; width: 99vw;">
-        <div style="position: absolute;bottom: 0; width: 99vw;">
+    <div id="graph-container" style="height: 100vh; width: 100vw;">
+        <div style="position: absolute;bottom: 0; width: 100%; z-index: 5;">
             <button class="button" style="position: absolute;left: 0; width: 50%; transform: translate(0,-100%);"
                 id="zoom-in-btn">Zoom In</button>
             <button class="button" style="position: absolute;right:0; width: 50%; transform: translate(0,-100%);"
@@ -93,23 +93,41 @@
                 numIter: 750,
                 initialTemp: 2000,
             }).run()
-            document.getElementById("zoom-in-btn").onclick = () => {
-                cy.zoom({
-                    level: cy.zoom() + .25,
-                    renderedPosition: {
-                        x: cyDiv.clientWidth / 2,
-                        y: cyDiv.clientHeight / 2
-                    }
-                })
+            zoomIn = () => {
+                return setInterval(function () {
+                    cy.zoom({
+                        level: cy.zoom() + .25,
+                        renderedPosition: {
+                            x: cyDiv.clientWidth / 2,
+                            y: cyDiv.clientHeight / 2
+                        }
+                    })
+                }, 500);
             }
-            document.getElementById("zoom-out-btn").onclick = () => {
-                cy.zoom({
-                    level: cy.zoom() - .25,
-                    renderedPosition: {
-                        x: cyDiv.clientWidth / 2,
-                        y: cyDiv.clientHeight / 2
-                    }
-                })
+            zoomOut = () => {
+                return setInterval(function () {
+                    cy.zoom({
+                        level: cy.zoom() - .25,
+                        renderedPosition: {
+                            x: cyDiv.clientWidth / 2,
+                            y: cyDiv.clientHeight / 2
+                        }
+                    })
+                }, 500);
+            }
+            zoomInInterval = null
+            zoomOutInterval = null
+            document.getElementById("zoom-in-btn").onmousedown = () => {
+                zoomInInterval = zoomIn()
+            }
+            document.getElementById("zoom-out-btn").onmousedown = () => {
+                zoomOutInterval = zoomOut()
+            }
+            document.getElementById("zoom-in-btn").onmouseup = () => {
+                clearInterval(zoomInInterval)
+            }
+            document.getElementById("zoom-out-btn").onmouseup = () => {
+                clearInterval(zoomOutInterval)
             }
         }
     </script>
