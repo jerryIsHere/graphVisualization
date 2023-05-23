@@ -117,19 +117,27 @@
             }
             zoomInInterval = null
             zoomOutInterval = null
-            document.getElementById("zoom-in-btn").onmousedown = () => {
+            document.getElementById("zoom-in-btn").onmousedown = (e) => {
                 zoomInInterval = zoomInInterval ? zoomInInterval : zoomIn()
+                e.stopPropagation();
+                return false;
             }
-            document.getElementById("zoom-out-btn").onmousedown = () => {
+            document.getElementById("zoom-out-btn").onmousedown = (e) => {
                 zoomOutInterval = zoomOutInterval ? zoomOutInterval : zoomOut()
+                e.stopPropagation();
+                return false;
             }
-            document.getElementById("zoom-in-btn").onmouseup = () => {
+            document.getElementById("zoom-in-btn").onmouseup = (e) => {
                 clearInterval(zoomInInterval)
                 zoomInInterval = null
+                e.stopPropagation();
+                return false;
             }
-            document.getElementById("zoom-out-btn").onmouseup = () => {
+            document.getElementById("zoom-out-btn").onmouseup = (e) => {
                 clearInterval(zoomOutInterval)
                 zoomOutInterval = null
+                e.stopPropagation();
+                return false;
             }
         }
     </script>
