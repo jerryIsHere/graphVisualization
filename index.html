@@ -96,24 +96,24 @@
             zoomIn = () => {
                 return setInterval(function () {
                     cy.zoom({
-                        level: cy.zoom() + .25,
+                        level: cy.zoom() + .05,
                         renderedPosition: {
                             x: cyDiv.clientWidth / 2,
                             y: cyDiv.clientHeight / 2
                         }
                     })
-                }, 250);
+                }, 10);
             }
             zoomOut = () => {
                 return setInterval(function () {
                     cy.zoom({
-                        level: cy.zoom() - .25,
+                        level: cy.zoom() - .05,
                         renderedPosition: {
                             x: cyDiv.clientWidth / 2,
                             y: cyDiv.clientHeight / 2
                         }
                     })
-                }, 250);
+                }, 10);
             }
             zoomInInterval = null
             zoomOutInterval = null
