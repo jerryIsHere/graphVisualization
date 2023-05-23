@@ -35,6 +35,7 @@
             return h_name + '.' + r_name + '.' + t_name
         }
         window.onload = () => {
+            let cyDiv = document.getElementById("graph-container")
             cy = cytoscape({
                 style: [{
                     selector: 'node',
@@ -56,7 +57,7 @@
                 wheelSensitivity: 0.15,
                 boxSelectionEnabled: false,
             })
-            cy.mount(document.getElementById("graph-container"))
+            cy.mount(cyDiv)
             triples.forEach(triple => {
                 [triple.h_name, triple.t_name].forEach(
                     name => {
@@ -90,10 +91,22 @@
                 initialTemp: 2000,
             }).run()
             document.getElementById("zoom-in-btn").onclick = () => {
-                cy.zoom(cy.zoom() + .1)
+                cy.zoom({
+                    level: cy.zoom() + .25,
+                    renderedPosition: {
+                        x: cyDiv.clientWidth / 2,
+                        y: cyDiv.clientHeight / 2
+                    }
+                })
             }
             document.getElementById("zoom-out-btn").onclick = () => {
-                cy.zoom(cy.zoom() - .1)
+                cy.zoom({
+                    level: cy.zoom() - .25,
+                    renderedPosition: {
+                        x: cyDiv.clientWidth / 2,
+                        y: cyDiv.clientHeight / 2
+                    }
+                })
             }
         }
     </script>
